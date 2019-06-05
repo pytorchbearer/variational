@@ -1,5 +1,5 @@
-torch>=0.4
+torch>=1.1.0
 torchbearer
 numpy
 Pillow
-torchvision
+torchvision>=0.3.0
