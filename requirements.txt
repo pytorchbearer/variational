@@ -1,0 +1,5 @@
+torch>=0.4
+torchbearer
+numpy
+Pillow
+torchvision
