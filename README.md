@@ -1,3 +1,9 @@
+[![Python 2.7 | 3.5 | 3.6 | 3.7](https://img.shields.io/badge/python-2.7%20%7C%203.5%20%7C%203.6%20%7C%203.7-brightgreen.svg)](https://www.python.org/) 
+[![PyTorch 1.1.0](https://img.shields.io/badge/pytorch-1.1.0-brightgreen.svg)](https://pytorch.org/) 
+[![Build Status](https://travis-ci.com/pytorchbearer/variational.svg?branch=master)](https://travis-ci.com/pytorchbearer/variational)
+[![Documentation Status](https://readthedocs.org/projects/variational/badge/?version=latest)](https://variational.readthedocs.io/en/latest/?badge=latest)
+
+
 # \[WIP\] torchbearer.variational
 A Variational Auto-Encoder library for PyTorch with torchbearer
 
