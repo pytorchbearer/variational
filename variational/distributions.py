@@ -12,13 +12,13 @@ from numbers import Number
 import torch
 from torch.distributions import Distribution
 from torch.distributions.utils import broadcast_all
-from torchbearer import cite
+from .utils import cite
 
 steve = """
 @article{squires2019a,
-title={A Variational Autoencoder for Probabilistic Non-Negative Matrix Factorisation},
-author={Steven Squires and Adam Prugel-Bennett and Mahesan Niranjan},
-year={2019}
+  title={A Variational Autoencoder for Probabilistic Non-Negative Matrix Factorisation},
+  author={Steven Squires and Adam Prugel-Bennett and Mahesan Niranjan},
+  year={2019}
 }
 """
 
@@ -207,7 +207,6 @@ class SimpleExponential(SimpleDistribution):
         return self.lograte - self.lograte.exp() * value
 
 
-@cite(steve)
 class SimpleWeibull(SimpleDistribution):
     """The SimpleWeibull class is a :class:`SimpleDistribution` which implements a straight forward Weibull
     distribution. This performs significantly fewer checks than `torch.distributions.Weibull`, but should be sufficient
@@ -228,6 +227,7 @@ class SimpleWeibull(SimpleDistribution):
 
         super(SimpleWeibull, self).__init__(batch_shape=batch_shape)
 
+    @cite(steve)
     def rsample(self, sample_shape=torch.Size()):
         """Simple rsample for a Weibull distribution.
 
@@ -252,3 +252,4 @@ class SimpleWeibull(SimpleDistribution):
         value = value if torch.is_tensor(value) else torch.tensor(value, dtype=torch.get_default_dtype())
         lb=value.ge(torch.zeros(value.shape, dtype=self.k.dtype, device=self.k.device)).float()
         return torch.log(lb) + torch.log(self.k/self.l) + (self.k - torch.ones(self.k.shape, dtype=self.k.dtype, device=self.k.device))*torch.log((lb*value+self.const)/self.l) - torch.pow(value/self.l, self.k)
+

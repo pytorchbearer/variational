@@ -6,8 +6,10 @@ import functools
 
 import torch
 import torchbearer
-from torchbearer import cite
+
 import torchbearer.callbacks as callbacks
+
+from .utils import cite
 
 beta_vae = """
 @article{higgins2016beta,
@@ -26,14 +28,13 @@ understanding_beta_vae = """
 }
 """
 
-weibullKL="""
+weibullKL = """
 @article{DBLP:journals/corr/Bauckhage14,
-  author    = {Christian Bauckhage},
-  title     = {Computing the Kullback-Leibler Divergence between two Generalized
-               Gamma Distributions},
-  journal   = {CoRR},
-  volume    = {abs/1401.6853},
-  year      = {2014}
+  author={Christian Bauckhage},
+  title={Computing the Kullback-Leibler Divergence between two Generalized Gamma Distributions},
+  journal={CoRR},
+  volume={abs/1401.6853},
+  year={2014}
 }
 """
 
@@ -214,10 +215,7 @@ class SimpleNormalSimpleNormalKL(DivergenceBase):
 @cite(weibullKL)
 class SimpleWeibullSimpleWeibullKL(DivergenceBase):
     """A KL divergence between two SimpleWeibull (or similar) distributions.
-
-    .. note::
-
-       The distribution object must have lambda (scale) and k (shape) attributes
+    The distribution object must have lambda (scale) and k (shape) attributes.
 
      Args:
         input_key: :class:`.StateKey` instance which will be mapped to the input distribution object.
@@ -261,4 +259,3 @@ class SimpleExponentialSimpleExponentialKL(DivergenceBase):
         lograte_2 = target.lograte
         loss = lograte_1 - lograte_2 + lograte_2.exp()/lograte_1.exp() - 1
         return loss
-
