@@ -14,7 +14,7 @@ from torch.distributions import Distribution
 from torch.distributions.utils import broadcast_all
 from .utils import cite
 
-steve = """
+_steve = """
 @article{squires2019a,
   title={A Variational Autoencoder for Probabilistic Non-Negative Matrix Factorisation},
   author={Steven Squires and Adam Prugel-Bennett and Mahesan Niranjan},
@@ -207,6 +207,7 @@ class SimpleExponential(SimpleDistribution):
         return self.lograte - self.lograte.exp() * value
 
 
+@cite(_steve)
 class SimpleWeibull(SimpleDistribution):
     """The SimpleWeibull class is a :class:`SimpleDistribution` which implements a straight forward Weibull
     distribution. This performs significantly fewer checks than `torch.distributions.Weibull`, but should be sufficient
@@ -227,7 +228,6 @@ class SimpleWeibull(SimpleDistribution):
 
         super(SimpleWeibull, self).__init__(batch_shape=batch_shape)
 
-    @cite(steve)
     def rsample(self, sample_shape=torch.Size()):
         """Simple rsample for a Weibull distribution.
 

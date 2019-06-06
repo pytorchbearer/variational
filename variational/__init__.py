@@ -4,7 +4,7 @@ Distributions
 
 ..  automodule:: variational.distributions
         :members:
-        :undoc-members:
+        :undoc-members: steve
 
 Divergences
 ------------------------------------

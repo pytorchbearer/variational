@@ -11,7 +11,7 @@ import torchbearer.callbacks as callbacks
 
 from .utils import cite
 
-beta_vae = """
+_beta_vae = """
 @article{higgins2016beta,
   title={beta-vae: Learning basic visual concepts with a constrained variational framework},
   author={Higgins, Irina and Matthey, Loic and Pal, Arka and Burgess, Christopher and Glorot, Xavier and Botvinick, Matthew and Mohamed, Shakir and Lerchner, Alexander},
@@ -19,7 +19,7 @@ beta_vae = """
 }
 """
 
-understanding_beta_vae = """
+_understanding_beta_vae = """
 @article{burgess2018understanding,
   title={Understanding disentangling in beta-vae},
   author={Burgess, Christopher P and Higgins, Irina and Pal, Arka and Matthey, Loic and Watters, Nick and Desjardins, Guillaume and Lerchner, Alexander},
@@ -28,7 +28,7 @@ understanding_beta_vae = """
 }
 """
 
-weibullKL = """
+_weibullKL = """
 @article{DBLP:journals/corr/Bauckhage14,
   author={Christian Bauckhage},
   title={Computing the Kullback-Leibler Divergence between two Generalized Gamma Distributions},
@@ -128,7 +128,7 @@ class DivergenceBase(callbacks.Callback):
         """
         return self.with_reduction(lambda x: x.sum())
 
-    @cite(beta_vae)
+    @cite(_beta_vae)
     def with_beta(self, beta):
         """Multiply the divergence by the given beta, as introduced by beta-vae.
 
@@ -142,7 +142,7 @@ class DivergenceBase(callbacks.Callback):
             return beta * loss
         return self.with_post_function(beta_div)
 
-    @cite(understanding_beta_vae)
+    @cite(_understanding_beta_vae)
     def with_linear_capacity(self, min_c=0, max_c=25, steps=100000, gamma=1000):
         """Limit divergence by capacity, linearly increased from min_c to max_c for steps, as introduced in
         `Understanding disentangling in beta-VAE`.
@@ -212,7 +212,7 @@ class SimpleNormalSimpleNormalKL(DivergenceBase):
         return 0.5 * (logvar_1.exp() / logvar_2.exp() + (mu_2 - mu_1).pow(2) / logvar_2.exp() + logvar_2 - logvar_1 - 1)
 
 
-@cite(weibullKL)
+@cite(_weibullKL)
 class SimpleWeibullSimpleWeibullKL(DivergenceBase):
     """A KL divergence between two SimpleWeibull (or similar) distributions.
     The distribution object must have lambda (scale) and k (shape) attributes.
