@@ -1,5 +1,6 @@
 """
-The distributions module includes a number of abstractions around divergences intended to simplify the construction and usage of multiple divergences and divergences on different parts of latent spaces.
+The divergence module includes abstractions around and implementations of divergences intended to simplify the construction and
+usage of multiple divergences and divergences on different parts of latent spaces.
 """
 import functools
 

@@ -1,3 +1,8 @@
+"""
+The visualisation module contains a number of latent space visualisation techniques designed to work with the base
+variation.auto_encoder alongside an abstraction that allows for creating custom visualisations.
+"""
+
 import torch
 
 import torchbearer

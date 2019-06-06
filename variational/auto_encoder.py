@@ -1,3 +1,7 @@
+"""
+The auto encoder module includes an abstraction around the standard VAE architecture which allows for simple
+construction without loss of flexibility.
+"""
 import torch.nn.modules as nn
 
 import torchbearer

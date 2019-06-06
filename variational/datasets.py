@@ -1,3 +1,6 @@
+"""
+The datasets module includes a number of standard VAE datasets in the style of the torchvision.datasets module.
+"""
 import os
 import shutil
 import zipfile
