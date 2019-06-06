@@ -25,7 +25,13 @@ both research and teaching / learning regarding VAEs.
 
 ## Installation
 
-TBC
+The easiest way to install visual is with pip:
+
+`pip install torchbearer-variational`
+
+Alternatively, build from source with:
+
+`pip install git+https://github.com/pytorchbearer/variational`
 
 <a name="goals"/>
 
