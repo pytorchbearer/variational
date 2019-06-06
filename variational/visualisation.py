@@ -10,12 +10,12 @@ import torchbearer.callbacks as c
 
 
 class LatentWalker(c.Callback):
+    """
+    Args:
+        same_image (bool): If True, use the same image for all latent dimension walks. Else each dimension has different image
+        row_size (int): Number of images displayed in each row of the grid.
+    """
     def __init__(self, same_image, row_size):
-        """
-        Args:
-            same_image (bool): If True, use the same image for all latent dimension walks. Else each dimension has different image
-            row_size (int): Number of images displayed in each row of the grid.
-        """
         super(LatentWalker, self).__init__()
         self.data_key = None
         self.same_image = same_image
@@ -119,14 +119,14 @@ class LatentWalker(c.Callback):
 
 
 class ReconstructionViewer(LatentWalker):
-    def __init__(self, row_size=8, recon_key=torchbearer.Y_PRED):
-        """
-        Latent space walker that just returns the reconstructed images for the batch
+    """
+    Latent space walker that just returns the reconstructed images for the batch
 
-        Args:
-            row_size (int): Number of images displayed in each row of the grid.
-            recon_key (StateKey): :class:`.StateKey` of the reconstructed images
-        """
+    Args:
+        row_size (int): Number of images displayed in each row of the grid.
+        recon_key (StateKey): :class:`.StateKey` of the reconstructed images
+    """
+    def __init__(self, row_size=8, recon_key=torchbearer.Y_PRED):
         super(ReconstructionViewer, self).__init__(False, row_size)
         self.recon_key = recon_key
 
@@ -137,18 +137,18 @@ class ReconstructionViewer(LatentWalker):
 
 
 class LinSpaceWalker(LatentWalker):
-    def __init__(self, lin_start=-1, lin_end=1, lin_steps=8, dims_to_walk=[0], zero_init=False, same_image=False):
-        """
-        Latent space walker that explores each dimension linearly from start to end points
+    """
+    Latent space walker that explores each dimension linearly from start to end points
 
-        Args:
-            lin_start (float): Starting point of linspace
-            lin_end (float): End point of linspace
-            lin_steps (int): Number of steps to take in linspace
-            dims_to_walk (list of int): List of dimensions to walk
-            zero_init (bool): If True, dimensions not being walked are 0. Else, they are obtained from encoder
-            same_image (bool): If True, use same image for each dimension walked. Else, use different images
-        """
+    Args:
+        lin_start (float): Starting point of linspace
+        lin_end (float): End point of linspace
+        lin_steps (int): Number of steps to take in linspace
+        dims_to_walk (list of int): List of dimensions to walk
+        zero_init (bool): If True, dimensions not being walked are 0. Else, they are obtained from encoder
+        same_image (bool): If True, use same image for each dimension walked. Else, use different images
+    """
+    def __init__(self, lin_start=-1, lin_end=1, lin_steps=8, dims_to_walk=[0], zero_init=False, same_image=False):
         super(LinSpaceWalker, self).__init__(same_image, lin_steps)
         self.dims_to_walk = dims_to_walk
         self.zero_init = zero_init
@@ -187,16 +187,16 @@ class LinSpaceWalker(LatentWalker):
 
 
 class RandomWalker(LatentWalker):
-    def __init__(self, var=1, num_images=32, uniform=False, row_size=8):
-        """
-        Latent space walker that shows random samples from latent space
+    """
+    Latent space walker that shows random samples from latent space
 
-        Args:
-            var (float or torch.Tensor): Variance of random sample
-            num_images (int): Number of random images to sample
-            uniform (bool): If True, sample uniform distribution [-v, v). If False, sample normal distribution with var v
-            row_size (int): Number of images displayed in each row of the grid.
-        """
+    Args:
+        var (float or torch.Tensor): Variance of random sample
+        num_images (int): Number of random images to sample
+        uniform (bool): If True, sample uniform distribution [-v, v). If False, sample normal distribution with var v
+        row_size (int): Number of images displayed in each row of the grid.
+    """
+    def __init__(self, var=1, num_images=32, uniform=False, row_size=8):
         super(RandomWalker, self).__init__(False, row_size)
         self.num_images = num_images
         self.uniform = uniform
@@ -219,15 +219,15 @@ class RandomWalker(LatentWalker):
 
 
 class CodePathWalker(LatentWalker):
-    def __init__(self, num_steps, p1, p2):
-        """
-        Latent space walker that walks between two specified codes p1 and p2
+    """
+    Latent space walker that walks between two specified codes p1 and p2
 
-        Args:
-            num_steps (int): Number of steps to take between points
-            p1 (torch.Tensor): Batch of codes
-            p2 (torch.Tensor): Batch of codes
-        """
+    Args:
+        num_steps (int): Number of steps to take between points
+        p1 (torch.Tensor): Batch of codes
+        p2 (torch.Tensor): Batch of codes
+    """
+    def __init__(self, num_steps, p1, p2):
         super(CodePathWalker, self).__init__(True, num_steps)
         self.p1 = p1
         self.p2 = p2
@@ -246,15 +246,15 @@ class CodePathWalker(LatentWalker):
 
 
 class ImagePathWalker(CodePathWalker):
-    def __init__(self, num_steps, im1, im2):
-        """
-        Latent space walker that walks between two specified images im1 and im2
+    """
+    Latent space walker that walks between two specified images im1 and im2
 
-        Args:
-            num_steps (int): Number of steps to take between points
-            im1 (torch.Tensor): Batch of images
-            im2 (torch.Tensor): Batch of images
-        """
+    Args:
+        num_steps (int): Number of steps to take between points
+        im1 (torch.Tensor): Batch of images
+        im2 (torch.Tensor): Batch of images
+    """
+    def __init__(self, num_steps, im1, im2):
         super(ImagePathWalker, self).__init__(num_steps, None, None)
         self.im1, self.im2 = im1, im2
 
