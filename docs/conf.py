@@ -28,7 +28,7 @@ author = 'Torchbearer Contributors'
 # built documents.
 
 version_dict = {}
-exec(open("../visual/version.py").read(), version_dict)
+exec(open("../variational/version.py").read(), version_dict)
 
 # The short X.Y version.
 version = version_dict['__version__']
