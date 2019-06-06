@@ -1,3 +1,6 @@
+"""
+The distributions module includes a number of abstractions around divergences intended to simplify the construction and usage of multiple divergences and divergences on different parts of latent spaces.
+"""
 import functools
 
 import torch
@@ -206,6 +209,7 @@ class SimpleNormalSimpleNormalKL(DivergenceBase):
         mu_2, logvar_2 = target.mu, target.logvar
         return 0.5 * (logvar_1.exp() / logvar_2.exp() + (mu_2 - mu_1).pow(2) / logvar_2.exp() + logvar_2 - logvar_1 - 1)
 
+
 @cite(weibullKL)
 class SimpleWeibullSimpleWeibullKL(DivergenceBase):
     """A KL divergence between two SimpleWeibull (or similar) distributions.
@@ -234,6 +238,7 @@ class SimpleWeibullSimpleWeibullKL(DivergenceBase):
         d = torch.mul(torch.pow(torch.div(lambda_1, lambda_2), k_2), gammaf)
         loss = torch.mean(a - b + c + d - 1)
         return loss
+
 
 class SimpleExponentialSimpleExponentialKL(DivergenceBase):
     """A KL divergence between two SimpleExponential (or similar) distributions.
